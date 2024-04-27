@@ -4,6 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { useApiMuatation } from "@/hooks/use-api-mutation";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 interface NewBoardButtonProps {
@@ -11,20 +12,22 @@ interface NewBoardButtonProps {
   disabled?: boolean;
 }
 export const NewBoardButton = ({ orgId, disabled }: NewBoardButtonProps) => {
-    const {mutate,pending} = useApiMuatation(api.board.create);
-    const onClick = ()=>{
-        // if(!organization) return;
-        mutate({
-            orgId,
-            title:"Untitled"
-        })
-            .then((id)=>{
-                toast.success("Board created successfully")
-            })
-            .catch((err)=>{
-                 toast.error("Failed to create board")
-             })
-    }
+  const router = useRouter();
+  const { mutate, pending } = useApiMuatation(api.board.create);
+  const onClick = () => {
+    // if(!organization) return;
+    mutate({
+      orgId,
+      title: "Untitled",
+    })
+      .then((id) => {
+        toast.success("Board created successfully");
+        router.push(`/board/${id}`);
+      })
+      .catch((err) => {
+        toast.error("Failed to create board");
+      });
+  };
   return (
     <button
       disabled={disabled}
@@ -34,8 +37,8 @@ export const NewBoardButton = ({ orgId, disabled }: NewBoardButtonProps) => {
         disabled && "opacity-75 hover:bh-blue-600 cursor-not-allowed"
       )}
     >
-      <div/>
-      <Plus className="h-12 w-12 text-white stroke-1"/> 
+      <div />
+      <Plus className="h-12 w-12 text-white stroke-1" />
       <p className="text-sm text-white font-light">New board</p>
     </button>
   );
