@@ -22,7 +22,7 @@ export const Cursor = memo(({connectionId}:CursorProps)=>{
     return (
         <foreignObject
         style={{
-            transform: `trasnlateX(${x}px) translateY(${y}px)`
+            transform: `translateX(${x}px) translateY(${y}px)`
         }}
         height={50}
         width={name.length * 10 + 24}

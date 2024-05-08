@@ -34,7 +34,9 @@ export const Canvas = ({ boardId }: CanvasProps) => {
 
     const current = pointerEventToCanvasPoint(e,camera)
     setMyPresence({cursor: current})
+
   }, [])
+  
 
   const onPointerLeave = useMutation(({ setMyPresence})=>{
     setMyPresence({cursor: null})
