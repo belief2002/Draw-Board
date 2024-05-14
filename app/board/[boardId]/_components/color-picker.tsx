@@ -11,6 +11,13 @@ export const ColorPicker = ({ onChange }: ColorPickerProps) => {
   return (
     <div className="flex flex-wrap gap-2 items-center max-w-[164px] pr-2 mr-2 border-r border-neutral-200">
       <ColorButton onClick={onChange}color={{r: 243,g: 63,b: 25,}}/>
+      <ColorButton onClick={onChange}color={{r: 195,g: 255,b: 147,}}/>
+      <ColorButton onClick={onChange}color={{r: 255,g: 112,b: 171,}}/>
+      <ColorButton onClick={onChange}color={{r: 255,g: 219,b: 92,}}/>
+      <ColorButton onClick={onChange}color={{r: 90,g: 188,b: 255,}}/>
+      <ColorButton onClick={onChange}color={{r: 202,g: 244,b: 255,}}/>
+      <ColorButton onClick={onChange}color={{r: 255,g: 255,b: 255,}}/>
+      <ColorButton onClick={onChange}color={{r: 25,g: 25,b: 25,}}/>
     </div>
   );
 };
