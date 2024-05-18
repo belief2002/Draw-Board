@@ -79,3 +79,5 @@ export const LayerPreview = memo(
     }
   }
 );
+
+LayerPreview.displayName = "Layer Preview";

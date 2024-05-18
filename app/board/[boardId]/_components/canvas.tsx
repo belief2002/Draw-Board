@@ -5,7 +5,7 @@ import { CursorsPresence } from "./cursors-presence";
 import { Participants } from "./participants";
 import { Toolbar } from "./toolbar";
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { nanoid } from "nanoid";
 
 import {
@@ -40,6 +40,8 @@ import { LayerPreview } from "./layer-preview";
 import { SelectionBox } from "./selection-box";
 import { SelectionTools } from "./selection-tools";
 import { Path } from "./parh";
+import { useDisableScroolBounce } from "@/hooks/use-disable-scrooll-bounce";
+import { useDeleteLayers } from "@/hooks/use-delete-layers";
 
 const MAX_LAYERS = 100;
 interface CanvasProps {
@@ -59,7 +61,9 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     g: 248,
     b: 180,
   });
+  
 
+  useDisableScroolBounce();
   const history = useHistory();
   const canUndo = useCanUndo();
   const canRedo = useCanRedo();
@@ -382,6 +386,37 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     }
     return layerIdsToColorSelection;
   }, [selections]);
+
+
+  const deleteLayers = useDeleteLayers()
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent){
+      switch(e.key) {
+        case "z":
+          if (e.ctrlKey) {
+            history.undo();
+          }
+          break;
+        case "y":
+          if (e.ctrlKey) {
+            history.redo();
+          }
+          break;
+        case "Delete":
+          deleteLayers();
+          break;
+        default:
+          break;
+      }
+
+      
+    }
+    document.addEventListener("keydown",onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown",onKeyDown);
+    }
+  },[deleteLayers, history]);
 
   return (
     <main className=" h-full w-full relative bg-neutral-100 touch-none">

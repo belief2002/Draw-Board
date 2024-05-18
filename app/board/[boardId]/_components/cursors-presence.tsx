@@ -61,4 +61,4 @@ export const CursorsPresence = memo(()=>{
     )
 })
 
-// CursorsPresence.displayName = "Cursors Presence"
+CursorsPresence.displayName = "Cursors Presence"
