@@ -19,7 +19,12 @@ export const Room =({
 } : RoomProps)=>{
     return (
         <RoomProvider 
-        id={roomId} initialPresence={{cursor:null, selection:[]}}
+        id={roomId} initialPresence={{
+            cursor:null, 
+            selection:[],
+            pencilDraft:null,
+            penColor:null,
+        }}
         initialStorage={{
             layers: new LiveMap<string, LiveObject<Layer>>(),
             layerIds: new LiveList()
