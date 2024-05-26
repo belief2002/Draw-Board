@@ -18,11 +18,9 @@ interface BoardListProps {
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
   const data = useQuery(api.boards.get, { orgId, ...query });
-<<<<<<< HEAD
+
   console.log({query});
-  
-=======
->>>>>>> parent of 25277f3 (debugging-1)
+
 
   if (data === undefined) {
     return (
