@@ -5,13 +5,8 @@ import { BoardList } from "./_components/board-list";
 import { useSearchParams } from "next/navigation";
 
 
-interface DashboardPageProps{
-  searchParams:{
-    search?: string;
-    favorites?: string
-  }
-}
-export default function DashboardPage({searchParams}:DashboardPageProps) {
+
+export default function DashboardPage() {
   const { organization } = useOrganization();
   const params = useSearchParams();
   const search = params.get('search') || '';
